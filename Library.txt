@@ -6,7 +6,7 @@ local LocalPlayer = Players.LocalPlayer
 
 local Linux = {
     Theme = {
-        Background = Color3.fromRGB(18, 18, 18),
+        Background = Color3.fromRGB(15, 15, 15),
         Element = Color3.fromRGB(22, 22, 22),
         Accent = Color3.fromRGB(70, 130, 180),
         Text = Color3.fromRGB(180, 180, 180),
@@ -195,25 +195,11 @@ function Linux.Create(config)
         ZIndex = 2
     })
 
-    local SubtitleLabel = Linux.Instance("TextLabel", {
-        Parent = TopBar,
-        BackgroundTransparency = 1,
-        Size = UDim2.new(0, 0, 1, 0),
-        Position = UDim2.new(0, 5 + TitleLabel.TextBounds.X + 4, 0, 0),
-        Font = Enum.Font.SourceSansBold,
-        Text = config.Subtitle or "Subtitle",
-        TextColor3 = Color3.fromRGB(100, 100, 100),
-        TextSize = 10,
-        TextXAlignment = Enum.TextXAlignment.Left,
-        AutomaticSize = Enum.AutomaticSize.X,
-        ZIndex = 2
-    })
-
     local BetaLabel = Linux.Instance("Frame", {
         Parent = TopBar,
-        BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+        BackgroundColor3 = Color3.fromRGB(22, 22, 22),
         Size = UDim2.new(0, 40, 0, 16),
-        Position = UDim2.new(0, TitleLabel.TextBounds.X + SubtitleLabel.TextBounds.X + 15, 0, 4),
+        Position = UDim2.new(0, TitleLabel.TextBounds.X + 10, 0, 4),
         ZIndex = 2
     })
 
@@ -412,8 +398,7 @@ function Linux.Create(config)
                 ColorSequenceKeypoint.new(0, Color3.fromRGB(70, 130, 180)),
                 ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 105, 180))
             }),
-            Rotation = 45,
-            Enabled = false
+            Rotation = 45
         })
 
         Linux.Instance("UICorner", {
@@ -511,23 +496,17 @@ function Linux.Create(config)
             for _, tab in pairs(Tabs) do
                 tab.Content.Visible = false
                 tab.TitleFrame.Visible = false
-                tab.Button.BackgroundColor3 = Linux.Theme.Element
                 tab.Text.TextColor3 = Color3.fromRGB(100, 100, 100)
                 if tab.Icon then
                     tab.Icon.ImageColor3 = Color3.fromRGB(100, 100, 100)
                 end
-                if tab.Gradient then
-                    tab.Gradient.Enabled = false
-                end
             end
             TabContent.Visible = true
             TitleFrame.Visible = true
-            TabBtn.BackgroundColor3 = Linux.Theme.Element
             TabText.TextColor3 = Color3.fromRGB(255, 255, 255)
             if TabIcon then
                 TabIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
             end
-            TabGradient.Enabled = true
             CurrentTab = tabIndex
         end
 
@@ -826,6 +805,15 @@ function Linux.Create(config)
                 LayoutOrder = elementOrder
             })
 
+            local GradientDrop = Linux.Instance("UIGradient", {
+                Parent = DropFrame,
+                Color = ColorSequence.new({
+                    ColorSequenceKeypoint.new(0, Color3.fromRGB(60, 110, 160)),
+                    ColorSequenceKeypoint.new(1, Color3.fromRGB(235, 95, 160))
+                }),
+                Rotation = 45
+            })
+
             Linux.Instance("UICorner", {
                 Parent = DropFrame,
                 CornerRadius = UDim.new(0, 4)
@@ -890,6 +878,15 @@ function Linux.Create(config)
                             TextXAlignment = Enum.TextXAlignment.Center,
                             ZIndex = 3,
                             AutoButtonColor = false
+                        })
+
+                        local GradientOpt = Linux.Instance("UIGradient", {
+                            Parent = OptBtn,
+                            Color = ColorSequence.new({
+                                ColorSequenceKeypoint.new(0, Color3.fromRGB(70, 130, 180)),
+                                ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 105, 180))
+                            }),
+                            Rotation = 45
                         })
 
                         Linux.Instance("UICorner", {
